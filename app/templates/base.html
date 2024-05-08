@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Use a placeholder for the title, since the title variable value is unknown until runtime-->
+    <!-- Use a jinja conditional to change title based on if it's present or not-->
+    {% if title %}
+    <title>{{ title }} - Microblog</title>
+    {% else %}
+    <title>Welcome to Microblog!</title>
+    {% endif %}
+</head>
+
+<body>
+    <div>Microblog: <a href="/index">Home</a></div>
+    <hr>
+    <!-- This is where each component of our site's derived templates content can insert themselves-->
+    {% block content %}{% endblock %}
+</body>
+
+</html>
