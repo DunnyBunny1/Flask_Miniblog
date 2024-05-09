@@ -1,3 +1,4 @@
+<!--Base HTML template to be displayed whenever a user visits a page on our site. Contains logic for the website title in the browser, as well as a navigation bar at the top of the page with the links to commonly-accessed pages -->
 <!doctype html>
 <html>
 
@@ -12,9 +13,26 @@
 </head>
 
 <body>
-    <div>Microblog: <a href="/index">Home</a></div>
+    <!--Navigation bar for commonly-accessed web pages -->
+    <div>
+        Microblog:
+        <a href="{{ url_for('index')  }}">Home</a>
+        <a href="{{ url_for('login')  }}">Login</a>
+    </div>
     <hr>
-    <!-- This is where each component of our site's derived templates content can insert themselves-->
+
+    <!--Render any flashed messages from the flask backend as list items-->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <!-- This is where each component of our site's derived templates' content can insert themselves-->
     {% block content %}{% endblock %}
 </body>
 

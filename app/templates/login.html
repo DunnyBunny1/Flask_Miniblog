@@ -1,0 +1,30 @@
+<!--HTML template for the login page of our website-->
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Sign In</h1>
+<!--Container for the web form - specify an empty string for action so that the form is submitted to the URL currently in the address bar (the login page endpoint). Use the  method to indicate that the form should be submitted via HTTP POST. Use novalidate to indicate that validation of user input will have to occur server-side-->
+<form action="" method="post" novalidate>
+    <!--Use the hidden tag to generate a hidden field that includes a CSRF token-->
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        <!--Display any errors arising from form validation-->
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p> {{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p> {{ form.submit() }}</p>
+</form>
+
+{% endblock %}
