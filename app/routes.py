@@ -1,29 +1,28 @@
-from app import app
+from app import api
 from flask import render_template, flash, redirect, url_for
 from app.forms import LoginForm
 
 
-@app.route('/')
-@app.route('/index')
+@api.route('/')
+@api.route('/index')
 # This view function will be triggered whenever either endpoint specified
 # above is requested when a browser requests this URL. The return
 # value of the function will be returned to the browser
 def index():
-    # Create a mock user
+    # Create a mock user & mock posts
     user = {'username': 'DunnyBunny'}
     posts = [
-        {"author": {"username": "John"}, "body": "Beautiful Day in Boston!"},
-        {"author": {"username": "Susan"}, "body": "That movie was tuff"},
+        {"author": {"username": "Ross"}, "body": "Beautiful Day in Boston!"},
+        {"author": {"username": "Mighty"}, "body": "Suno suno ms chatterg"},
         {"author": {"username": "Bob"},"body": "The Celtics are the greatest team in the world"}
     ]
 
     return render_template("index.html", title="Home", user=user, posts=posts)
 
 # Responds to POST and GET requests to the login endpoint submitting 
-@app.route('/login',methods=['GET', 'POST'])
+@api.route('/login',methods=['GET', 'POST'])
 def login():
     form : LoginForm = LoginForm()
-    print(form.validate_on_submit())
     # Indicates the user is submitting information via a POST request and the data has been validated, process the form information 
     if form.validate_on_submit():
         # Display a message to the user confirming receipt of the credentials
